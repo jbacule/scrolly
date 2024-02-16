@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Scrolly",
+  "description": "Auto-scroll any webpage vertically. Good for reading long articles, news, manga anime and etc.",
+  "version": "1.0.0",
+  "permissions": ["activeTab", "storage", "commands"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/popup.png"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "content_scripts": [
+    {
+      "js": ["scripts/content.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "commands": {
+    "toggle-scroll": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space",
+        "mac": "MacCtrl+Shift+Space"
+      },
+      "description": "Toggle Scroll"
+    },
+    "toggle-scroll-to-top": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Up",
+        "mac": "MacCtrl+Shift+Up"
+      },
+      "description": "Toggle Scroll To Top"
+    }
+  }
+}
