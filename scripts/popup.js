@@ -11,6 +11,17 @@ document.addEventListener("DOMContentLoaded", function () {
       // set the input values
       document.getElementById("scrollPixels").value = scrollPixels;
       document.getElementById("scrollSeconds").value = scrollSeconds;
+    } else {
+      chrome.storage.local.set(
+        {
+          scrolling: "0",
+          scrollPixels: 100,
+          scrollSeconds: 1,
+        },
+        function () {
+          console.log("Scrolly Settings setup complete!");
+        }
+      );
     }
   });
 });
@@ -75,3 +86,11 @@ function updateScrollingStatus(status) {
     });
   });
 }
+
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  if (message.action === "stopScrollingAndRemoveBadge") {
+    setBadgeText(false);
+    updateScrollingStatus("0");
+    document.querySelector("#scrollControl").value = "Start";
+  }
+});
