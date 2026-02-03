@@ -1,12 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
   const scrollControlButton = document.querySelector("#scrollControl");
   const scrollToTopButton = document.querySelector("#scrollToTop");
+  const statusText = document.querySelector("#statusText");
 
   scrollControlButton.addEventListener("click", onScrollControl);
   scrollToTopButton.addEventListener("click", scrollToTop);
 
-  chrome.storage.local.get(["scrollPixels", "scrollSeconds"], function (data) {
-    const { scrollPixels, scrollSeconds } = data;
+  chrome.storage.local.get(["scrollPixels", "scrollSeconds", "scrolling"], function (data) {
+    const { scrollPixels, scrollSeconds, scrolling } = data;
     if (scrollPixels && scrollSeconds) {
       // set the input values
       document.getElementById("scrollPixels").value = scrollPixels;
@@ -23,6 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       );
     }
+
+    if (statusText) {
+      statusText.textContent = scrolling === "1" ? "Scrolling" : "Ready";
+    }
   });
 });
 
@@ -30,9 +35,11 @@ function onScrollControl() {
   const button = document.querySelector("#scrollControl");
   if (button.value === "Start") {
     button.value = "Stop";
+    setStatusText("Scrolling");
     startScrolling();
   } else {
     button.value = "Start";
+    setStatusText("Ready");
     stopScrolling();
   }
 }
@@ -73,6 +80,7 @@ function setBadgeText(isScrolling) {
 function scrollToTop() {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     updateScrollingStatus("0");
+    setStatusText("Ready");
 
     chrome.tabs.sendMessage(tabs[0].id, { action: "scrollToTop" });
   });
@@ -87,10 +95,18 @@ function updateScrollingStatus(status) {
   });
 }
 
+function setStatusText(text) {
+  const statusText = document.querySelector("#statusText");
+  if (statusText) {
+    statusText.textContent = text;
+  }
+}
+
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.action === "stopScrollingAndRemoveBadge") {
     setBadgeText(false);
     updateScrollingStatus("0");
     document.querySelector("#scrollControl").value = "Start";
+    setStatusText("Ready");
   }
 });

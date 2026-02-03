@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrolly</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap");
+
+      :root {
+        --bg: #f6f4f0;
+        --panel: #ffffff;
+        --text: #1c1b18;
+        --muted: #6c6760;
+        --border: #e4ded6;
+        --primary: #1c5cff;
+        --primary-dark: #1546c2;
+        --shadow: 0 10px 30px rgba(28, 27, 24, 0.12);
+        --radius: 14px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Space Grotesk", "IBM Plex Sans", "Segoe UI", sans-serif;
+      }
+
+      .container {
+        width: 240px;
+        padding: 16px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 14px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .title {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .subtitle {
+        margin: 4px 0 0;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .status {
+        font-size: 12px;
+        color: var(--muted);
+        background: #f3efe8;
+        border: 1px solid var(--border);
+        padding: 4px 8px;
+        border-radius: 999px;
+      }
+
+      .field {
+        margin-bottom: 12px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      input[type="number"] {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-size: 14px;
+        font-family: inherit;
+        background: #fcfbf9;
+        color: var(--text);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      input[type="number"]:focus {
+        outline: none;
+        border-color: rgba(28, 92, 255, 0.6);
+        box-shadow: 0 0 0 3px rgba(28, 92, 255, 0.15);
+      }
+
+      .actions {
+        display: grid;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .button-row {
+        display: grid;
+        gap: 6px;
+      }
+
+      input[type="button"] {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      }
+
+      input[type="button"].primary {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 8px 18px rgba(28, 92, 255, 0.2);
+      }
+
+      input[type="button"].secondary {
+        background: #f3efe8;
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+
+      input[type="button"]:hover {
+        transform: translateY(-1px);
+      }
+
+      input[type="button"].primary:hover {
+        background: var(--primary-dark);
+      }
+
+      input[type="button"].secondary:hover {
+        background: #ebe4da;
+      }
+
+      .hint {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .hint code {
+        font-family: "SFMono-Regular", "IBM Plex Mono", ui-monospace, monospace;
+        background: #f3efe8;
+        padding: 1px 6px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+      }
+    </style>
+    <script src="scripts/popup.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="header">
+          <div>
+            <h1 class="title">Scrolly</h1>
+            <p class="subtitle">Smooth auto-scroll, your pace.</p>
+          </div>
+          <span class="status" id="statusText">Ready</span>
+        </div>
+        <div class="field">
+          <label for="scrollPixels">Scroll Pixels</label>
+          <input type="number" id="scrollPixels" value="100" min="1" />
+        </div>
+        <div class="field">
+          <label for="scrollSeconds">Seconds per Scroll</label>
+          <input type="number" id="scrollSeconds" value="1" min="0.1" step="0.1" />
+        </div>
+        <div class="actions">
+          <div class="button-row">
+            <input class="primary" type="button" id="scrollControl" value="Start" />
+            <div class="hint">Shortcut <code>Ctrl</code>+<code>Shift</code>+<code>Space</code></div>
+          </div>
+          <div class="button-row">
+            <input class="secondary" type="button" id="scrollToTop" value="Scroll To Top" />
+            <div class="hint">Shortcut <code>Ctrl</code>+<code>Shift</code>+<code>ArrowUp</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
