@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (statusText) {
-      statusText.textContent = scrolling === "1" ? "Scrolling" : "Ready";
+      applyScrollingState(scrolling);
     }
   });
 });
@@ -45,8 +45,10 @@ function onScrollControl() {
 }
 
 function startScrolling() {
-  const scrollPixels = document.getElementById("scrollPixels").value;
-  const scrollSeconds = document.getElementById("scrollSeconds").value;
+  const scrollPixelsInput = document.getElementById("scrollPixels").value;
+  const scrollSecondsInput = document.getElementById("scrollSeconds").value;
+  const scrollPixels = Math.max(1, parseInt(scrollPixelsInput, 10) || 100);
+  const scrollSeconds = Math.max(0.1, parseFloat(scrollSecondsInput) || 1);
   chrome.storage.local.set(
     {
       scrolling: "1",
@@ -102,11 +104,25 @@ function setStatusText(text) {
   }
 }
 
+function applyScrollingState(scrolling) {
+  const button = document.querySelector("#scrollControl");
+  const isScrolling = scrolling === "1";
+  if (button) {
+    button.value = isScrolling ? "Stop" : "Start";
+  }
+  setStatusText(isScrolling ? "Scrolling" : "Ready");
+}
+
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.action === "stopScrollingAndRemoveBadge") {
     setBadgeText(false);
     updateScrollingStatus("0");
-    document.querySelector("#scrollControl").value = "Start";
-    setStatusText("Ready");
+    applyScrollingState("0");
+  }
+});
+
+chrome.storage.onChanged.addListener(function (changes, areaName) {
+  if (areaName === "local" && changes.scrolling) {
+    applyScrollingState(changes.scrolling.newValue);
   }
 });

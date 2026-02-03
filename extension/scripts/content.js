@@ -4,6 +4,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.action === "startScrolling") {
     clearInterval(intervalId);
     const { scrollPixels, scrollSeconds } = message;
+    const safePixels = Math.max(1, parseInt(scrollPixels, 10) || 100);
+    const safeSeconds = Math.max(0.1, parseFloat(scrollSeconds) || 1);
 
     function autoScroll() {
       const pageHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
@@ -13,7 +15,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
       if (bottomOffset > 0) {
         window.scrollTo({
-          top: scrollY + parseInt(scrollPixels),
+          top: scrollY + safePixels,
           behavior: "smooth",
         });
       } else {
@@ -23,7 +25,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
       }
     }
 
-    intervalId = setInterval(autoScroll, scrollSeconds * 1000);
+    intervalId = setInterval(autoScroll, safeSeconds * 1000);
   } else if (message.action === "stopScrolling") {
     clearInterval(intervalId);
   } else if (message.action === "scrollToTop") {
