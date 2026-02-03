@@ -2,11 +2,18 @@
 
 Scrolly is a Chrome extension that enables automatic scrolling to the bottom of a long webpage. It provides settings for controlling the scrolling behavior, such as the number of pixels to scroll per scroll and the duration of each scroll in seconds. Additionally, Scrolly allows you to start and stop the scrolling process using keyboard shortcuts and provides an option to scroll back to the top of the page.
 
+## Latest Changes
+
+- New popup UI with a modern card layout, clearer hierarchy, and a live status pill for at-a-glance state.
+- Smooth, frame-based scrolling for a more natural feel at any speed.
+- Fixed button/status synchronization so the Start/Stop label and status text stay accurate when scrolling starts, stops, or finishes at the bottom.
+
 ## Functionalities
 
 - Automatic scrolling to the bottom of the webpage
-- Customizable settings for pixel per scroll and seconds per scroll
-- Start and stop scrolling functionality
+- Smooth, continuous scrolling based on your speed settings
+- Customizable settings for pixels per scroll and seconds per scroll
+- Start and stop scrolling functionality with accurate status feedback
 - Scroll to top option
 - Keyboard shortcuts for starting and stopping scrolling
 
