@@ -65,9 +65,8 @@ const structuredData = {
             <span>Scrolly</span>
           </div>
           <div class="nav-links">
-            <a href="#overview">Overview</a>
+            <a href="#install">Get Started</a>
             <a href="#features">Features</a>
-            <a href="#install">Install</a>
             <a href="#usage">How to Use</a>
           </div>
         </nav>
@@ -88,37 +87,70 @@ const structuredData = {
               </a>
             </div>
           </div>
-          <div class="hero-card reveal delay-2">
-            <h3>Perfect for</h3>
-            <p>
-              Reading long articles, news threads, research, and manga without constantly reaching for
-              your scroll wheel.
-            </p>
-            <div class="cta-group">
-              <div class="feature-card">
-                <strong>Scroll Scheduler</strong>
-                <span class="badge">New</span>
-                <p>Schedule start/stop times to keep long sessions hands-free.</p>
-              </div>
-            </div>
+          <div class="hero-preview reveal delay-2">
+            <img
+              class="preview-web"
+              src="/images/preview-web.png"
+              alt="Web page preview"
+              loading="lazy"
+            />
+            <img
+              class="preview-ext"
+              src="/images/preview-ext.png"
+              alt="Extension preview"
+              loading="lazy"
+            />
           </div>
         </section>
       </div>
 
-      <section id="overview" class="section">
+      <section class="section video-section">
         <div class="container">
-          <h2 class="reveal">Overview</h2>
+          <div class="video-header">
+            <h2 class="reveal">Watch Scrolly in action</h2>
+            <p class="lead reveal delay-1">
+              See the extension in a quick walkthrough.
+            </p>
+            <img class="video-arrow" src="/images/right-down.png" alt="" aria-hidden="true" />
+          </div>
+          <div class="video-embed reveal delay-2">
+            <iframe
+              src="https://www.youtube.com/embed/uG_cxgHdgMo"
+              title="Scrolly extension walkthrough"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section id="install" class="section">
+        <div class="container">
+          <h2 class="reveal">Get started</h2>
           <p class="lead reveal delay-1">
-            Scrolly is a lightweight extension that auto-scrolls long pages for you. It’s built for
-            articles, news threads, manga, and more—hands-free. Dial in your speed and step size,
-            pause instantly, and return to your start position with one click.
+            Scrolly is available on the Chrome Web Store and works with Chromium browsers like Chrome,
+            Edge, and Brave.
           </p>
-          <div class="flex-split">
-            <div class="screenshot-card reveal delay-2">
-              <img src="/images/image-1.png" alt="Scrolly extension popup" />
+          <div class="steps">
+            <div class="step reveal delay-1">
+              <span>Step 1</span>
+              <h3>Open the listing</h3>
+              <p>
+                <a class="button primary" href={webStoreUrl} target="_blank" rel="noreferrer">
+                  Visit Chrome Web Store
+                </a>
+              </p>
             </div>
-            <div class="screenshot-card reveal delay-3">
-              <img src="/images/image-2.png" alt="Scrolly settings preview" />
+            <div class="step reveal delay-2">
+              <span>Step 2</span>
+              <h3>Add &amp; pin</h3>
+              <p>Click “Add to Chrome” and pin Scrolly for quick access.</p>
+            </div>
+            <div class="step reveal delay-3">
+              <span>Step 3</span>
+              <h3>Configure &amp; start</h3>
+              <p>Set your scroll pace, press Start, and pause anytime.</p>
             </div>
           </div>
         </div>
@@ -152,62 +184,8 @@ const structuredData = {
               <p>Set pixels per scroll and seconds per scroll to match your pace.</p>
             </div>
             <div class="feature-card reveal delay-3">
-              <h3>Scroll Scheduler <span class="badge">New</span></h3>
-              <p>Schedule auto-scroll to start and stop at the times you choose.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <h2 class="reveal">How it works</h2>
-          <div class="steps">
-            <div class="step reveal delay-1">
-              <span>Step 1</span>
-              <h3>Install</h3>
-              <p>Grab Scrolly from the Chrome Web Store and pin it to your toolbar.</p>
-            </div>
-            <div class="step reveal delay-2">
-              <span>Step 2</span>
-              <h3>Configure</h3>
-              <p>Set your scroll pixels and seconds per scroll to match your reading pace.</p>
-            </div>
-            <div class="step reveal delay-3">
-              <span>Step 3</span>
-              <h3>Start &amp; stop</h3>
-              <p>Press Start to begin auto-scroll and click again whenever you need a pause.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="install" class="section">
-        <div class="container">
-          <h2 class="reveal">Install from the Web Store</h2>
-          <p class="lead reveal delay-1">
-            Scrolly is available on the Chrome Web Store and works with Chromium browsers like Chrome,
-            Edge, and Brave.
-          </p>
-          <div class="steps">
-            <div class="step reveal delay-1">
-              <span>Step 1</span>
-              <h3>Open the listing</h3>
-              <p>
-                <a class="button primary" href={webStoreUrl} target="_blank" rel="noreferrer">
-                  Visit Chrome Web Store
-                </a>
-              </p>
-            </div>
-            <div class="step reveal delay-2">
-              <span>Step 2</span>
-              <h3>Add to Chrome</h3>
-              <p>Click “Add to Chrome” and confirm the permissions.</p>
-            </div>
-            <div class="step reveal delay-3">
-              <span>Step 3</span>
-              <h3>Pin the extension</h3>
-              <p>Open your extensions menu and pin Scrolly for easy access.</p>
+              <h3>Works on any page</h3>
+              <p>Use it on articles, docs, research, and web apps without setup.</p>
             </div>
           </div>
         </div>
@@ -248,7 +226,9 @@ const structuredData = {
       <footer class="footer">
         <div class="container">
           <div class="nav-links">
-            <a href={webStoreUrl} target="_blank" rel="noreferrer">Chrome Web Store</a>
+            <a href="#install">Get Started</a>
+            <a href="#features">Features</a>
+            <a href="#usage">How to Use</a>
             <a href={githubUrl} target="_blank" rel="noreferrer">GitHub</a>
             <a href="/changelogs">Changelogs</a>
             <a href={portfolioUrl} target="_blank" rel="noreferrer">jbacule.dev</a>
