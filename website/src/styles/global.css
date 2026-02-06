@@ -57,10 +57,19 @@ main {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: "Space Grotesk", sans-serif;
   font-size: 1.3rem;
   font-weight: 600;
   letter-spacing: 0.02em;
+}
+
+.logo-mark {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
 }
 
 .nav-links {

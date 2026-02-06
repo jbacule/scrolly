@@ -13,3 +13,11 @@ cd website
 pnpm install
 pnpm run dev
 '''
+
+[[actions]]
+name = "websute run"
+icon = "tool"
+command = '''
+cd website
+pnpm run dev
+'''
