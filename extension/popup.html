@@ -106,7 +106,8 @@
         letter-spacing: 0.08em;
       }
 
-      input[type="number"] {
+      input[type="number"],
+      select {
         width: 100%;
         padding: 10px 12px;
         border: 1px solid var(--border);
@@ -118,7 +119,8 @@
         transition: border-color 0.2s ease, box-shadow 0.2s ease;
       }
 
-      input[type="number"]:focus {
+      input[type="number"]:focus,
+      select:focus {
         outline: none;
         border-color: rgba(28, 92, 255, 0.6);
         box-shadow: 0 0 0 3px rgba(28, 92, 255, 0.15);
@@ -215,6 +217,15 @@
           <p class="subtitle">Smooth auto-scroll, your pace.</p>
         </div>
         <div class="field">
+          <label for="scrollDirection">Scroll to</label>
+          <select id="scrollDirection">
+            <option value="bottom" selected>Bottom</option>
+            <option value="top">Top</option>
+            <option value="right">Right</option>
+            <option value="left">Left</option>
+          </select>
+        </div>
+        <div class="field">
           <label for="scrollPixels">Scroll Pixels</label>
           <input type="number" id="scrollPixels" value="100" min="1" />
         </div>
@@ -228,7 +239,7 @@
             <div class="hint">Shortcut <code>Ctrl</code>+<code>Shift</code>+<code>Space</code></div>
           </div>
           <div class="button-row">
-            <input class="secondary" type="button" id="scrollToTop" value="Scroll To Top" />
+            <input class="secondary" type="button" id="returnToStart" value="Return" />
             <div class="hint">Shortcut <code>Ctrl</code>+<code>Shift</code>+<code>ArrowUp</code></div>
           </div>
         </div>

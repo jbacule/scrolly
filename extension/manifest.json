@@ -36,7 +36,7 @@
         "default": "Ctrl+Shift+Up",
         "mac": "MacCtrl+Shift+Up"
       },
-      "description": "Toggle Scroll To Top"
+      "description": "Return to Start"
     }
   }
 }

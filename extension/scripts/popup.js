@@ -1,23 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
   const scrollControlButton = document.querySelector("#scrollControl");
-  const scrollToTopButton = document.querySelector("#scrollToTop");
+  const returnToStartButton = document.querySelector("#returnToStart");
   const statusText = document.querySelector("#statusText");
 
   scrollControlButton.addEventListener("click", onScrollControl);
-  scrollToTopButton.addEventListener("click", scrollToTop);
+  returnToStartButton.addEventListener("click", returnToStart);
 
-  chrome.storage.local.get(["scrollPixels", "scrollSeconds", "scrolling"], function (data) {
-    const { scrollPixels, scrollSeconds, scrolling } = data;
+  chrome.storage.local.get(["scrollPixels", "scrollSeconds", "scrolling", "scrollDirection"], function (data) {
+    const { scrollPixels, scrollSeconds, scrolling, scrollDirection } = data;
     if (scrollPixels && scrollSeconds) {
       // set the input values
       document.getElementById("scrollPixels").value = scrollPixels;
       document.getElementById("scrollSeconds").value = scrollSeconds;
+      document.getElementById("scrollDirection").value = scrollDirection || "bottom";
     } else {
       chrome.storage.local.set(
         {
           scrolling: "0",
           scrollPixels: 100,
           scrollSeconds: 1,
+          scrollDirection: "bottom",
         },
         function () {
           console.log("Scrolly Settings setup complete!");
@@ -47,18 +49,28 @@ function onScrollControl() {
 function startScrolling() {
   const scrollPixelsInput = document.getElementById("scrollPixels").value;
   const scrollSecondsInput = document.getElementById("scrollSeconds").value;
+  const scrollDirectionInput = document.getElementById("scrollDirection").value;
   const scrollPixels = Math.max(1, parseInt(scrollPixelsInput, 10) || 100);
   const scrollSeconds = Math.max(0.1, parseFloat(scrollSecondsInput) || 1);
+  const scrollDirection = scrollDirectionInput || "bottom";
   chrome.storage.local.set(
     {
       scrolling: "1",
       scrollPixels: scrollPixels,
       scrollSeconds: scrollSeconds,
+      scrollDirection: scrollDirection,
     },
     function () {
       console.log("Settings saved");
       chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: "startScrolling", scrollPixels, scrollSeconds });
+        const tabId = tabs[0]?.id;
+        if (!tabId) return;
+        chrome.tabs.sendMessage(tabId, {
+          action: "startScrolling",
+          scrollPixels,
+          scrollSeconds,
+          scrollDirection,
+        });
         setBadgeText(true);
       });
     }
@@ -79,21 +91,27 @@ function setBadgeText(isScrolling) {
   chrome.action.setBadgeText({ text });
 }
 
-function scrollToTop() {
+function returnToStart() {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     updateScrollingStatus("0");
     setStatusText("Ready");
 
-    chrome.tabs.sendMessage(tabs[0].id, { action: "scrollToTop" });
+    chrome.storage.local.get(["returnPosition"], function (data) {
+      const returnPosition = data.returnPosition || { x: 0, y: 0 };
+      chrome.tabs.sendMessage(tabs[0].id, { action: "returnToStart", returnPosition });
+    });
   });
 }
 
 function updateScrollingStatus(status) {
-  chrome.storage.local.get(["scrollPixels", "scrollSeconds"], function (data) {
-    const { scrollPixels, scrollSeconds } = data;
-    chrome.storage.local.set({ scrolling: status, scrollPixels, scrollSeconds }, function () {
+  chrome.storage.local.get(["scrollPixels", "scrollSeconds", "scrollDirection", "returnPosition"], function (data) {
+    const { scrollPixels, scrollSeconds, scrollDirection, returnPosition } = data;
+    chrome.storage.local.set(
+      { scrolling: status, scrollPixels, scrollSeconds, scrollDirection, returnPosition },
+      function () {
       console.log("Settings saved");
-    });
+      }
+    );
   });
 }
 
