@@ -149,6 +149,12 @@ main {
   margin-bottom: 16px;
 }
 
+.section h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  margin-bottom: 12px;
+}
+
 .section p.lead {
   color: var(--muted);
   margin-top: 0;
@@ -163,11 +169,56 @@ main {
 }
 
 .feature-card {
+  display: block;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 18px;
   min-height: 160px;
+}
+
+.feature-card .changelog-date {
+  margin-top: 18px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.changelog-article {
+  max-width: 760px;
+}
+
+.changelog-article h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  margin: 0 0 18px;
+}
+
+.changelog-article h2 {
+  font-family: "Space Grotesk", sans-serif;
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+
+.changelog-article p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.changelog-article strong {
+  color: var(--ink);
+}
+
+.changelog-article ul {
+  padding-left: 20px;
+  margin: 16px 0 24px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.changelog-article a {
+  color: var(--primary);
+  font-weight: 600;
 }
 
 .badge {

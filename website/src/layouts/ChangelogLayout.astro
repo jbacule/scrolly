@@ -1,0 +1,72 @@
+---
+import "../styles/global.css";
+
+const { title, summary } = Astro.props;
+const pageTitle = title ? `${title} — Scrolly` : "Scrolly Changelog";
+const pageDescription = summary || "Scrolly changelog entry.";
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageUrl = new URL("/images/og-scrolly.png", Astro.site).toString();
+const siteName = "Scrolly";
+const webStoreUrl = "https://chromewebstore.google.com/detail/scrolly/cljgkkbcdmljgocmchgmgcjnppbcfiii";
+const githubUrl = "https://github.com/jbacule/scrolly";
+const portfolioUrl = "https://jbacule.dev";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#0f6b5f" />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={siteName} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <link rel="icon" type="image/png" sizes="128x128" href="/images/favicon.png" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <nav class="nav">
+          <div class="logo">
+            <img class="logo-mark" src="/images/favicon.png" alt="Scrolly logo" />
+            <span>Scrolly</span>
+          </div>
+          <div class="nav-links">
+            <a href="/">Home</a>
+            <a href={webStoreUrl} target="_blank" rel="noreferrer">Web Store</a>
+          </div>
+        </nav>
+
+        <section class="section changelog-article">
+          <slot />
+        </section>
+      </div>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="nav-links">
+            <a href={webStoreUrl} target="_blank" rel="noreferrer">Chrome Web Store</a>
+            <a href={githubUrl} target="_blank" rel="noreferrer">GitHub</a>
+            <a href="/changelogs">Changelogs</a>
+            <a href={portfolioUrl} target="_blank" rel="noreferrer">jbacule.dev</a>
+          </div>
+          <p>Scrolly is available via the Chrome Web Store for fast, trusted updates.</p>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -6,7 +6,7 @@ name = "scrolly"
 script = ""
 
 [[actions]]
-name = "Run"
+name = "install and run dev"
 icon = "run"
 command = '''
 cd website
@@ -15,8 +15,8 @@ pnpm run dev
 '''
 
 [[actions]]
-name = "websute run"
-icon = "tool"
+name = "run dev"
+icon = "run"
 command = '''
 cd website
 pnpm run dev

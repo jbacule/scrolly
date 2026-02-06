@@ -1,0 +1,100 @@
+---
+import "../styles/global.css";
+
+const title = "Scrolly Changelogs";
+const description = "Product updates and highlights for Scrolly.";
+const canonicalUrl = new URL("/changelogs", Astro.site).toString();
+const ogImageUrl = new URL("/images/og-scrolly.png", Astro.site).toString();
+const siteName = "Scrolly";
+const webStoreUrl = "https://chromewebstore.google.com/detail/scrolly/cljgkkbcdmljgocmchgmgcjnppbcfiii";
+const githubUrl = "https://github.com/jbacule/scrolly";
+const portfolioUrl = "https://jbacule.dev";
+
+const entries = [
+  {
+    title: "Directional auto-scroll and return-to-start",
+    date: "Feb 6, 2026",
+    summary: "Scroll in any direction and return to your saved start position.",
+    href: "/changelogs/2026-02-06-directional-scroll"
+  },
+  {
+    title: "Smooth scrolling and refreshed popup UI",
+    date: "Feb 4, 2026",
+    summary: "Frame-based scrolling plus a cleaner popup layout and status sync.",
+    href: "/changelogs/2026-02-04-smooth-scroll"
+  }
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#0f6b5f" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={siteName} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <link rel="icon" type="image/png" sizes="128x128" href="/images/favicon.png" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <nav class="nav">
+          <div class="logo">
+            <img class="logo-mark" src="/images/favicon.png" alt="Scrolly logo" />
+            <span>Scrolly</span>
+          </div>
+          <div class="nav-links">
+            <a href="/">Home</a>
+            <a href={webStoreUrl} target="_blank" rel="noreferrer">Web Store</a>
+          </div>
+        </nav>
+
+        <section class="section">
+          <h1 class="reveal">Changelogs</h1>
+          <p class="lead reveal delay-1">Track the latest Scrolly improvements and releases.</p>
+          <div class="features">
+            {entries.map((entry, index) => (
+              <a
+                class="feature-card reveal"
+                style={`animation-delay: ${0.1 + index * 0.1}s`}
+                href={entry.href}
+              >
+                <h3>{entry.title}</h3>
+                <p>{entry.summary}</p>
+                <p class="changelog-date">{entry.date}</p>
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <footer class="footer">
+        <div class="container">
+          <div class="nav-links">
+            <a href={webStoreUrl} target="_blank" rel="noreferrer">Chrome Web Store</a>
+            <a href={githubUrl} target="_blank" rel="noreferrer">GitHub</a>
+            <a href="/changelogs">Changelogs</a>
+            <a href={portfolioUrl} target="_blank" rel="noreferrer">jbacule.dev</a>
+          </div>
+          <p>Scrolly is available via the Chrome Web Store for fast, trusted updates.</p>
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>
