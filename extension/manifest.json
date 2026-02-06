@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Scrolly",
   "description": "Auto-scroll to the bottom of any extended webpage. Ideal for reading lengthy articles, news, manga, and other materials.",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "permissions": ["activeTab", "storage", "commands"],
   "action": {
     "default_popup": "popup.html",
