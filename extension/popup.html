@@ -45,10 +45,17 @@
 
       .header {
         display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+
+      .header-top {
+        display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 10px;
-        margin-bottom: 14px;
       }
 
       .title {
@@ -58,6 +65,18 @@
         letter-spacing: -0.02em;
       }
 
+      .title-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .title-icon {
+        width: 1.2em;
+        height: 1.2em;
+        display: block;
+      }
+
       .subtitle {
         margin: 4px 0 0;
         font-size: 12px;
@@ -65,11 +84,11 @@
       }
 
       .status {
-        font-size: 12px;
+        font-size: 11px;
         color: var(--muted);
         background: #f3efe8;
         border: 1px solid var(--border);
-        padding: 4px 8px;
+        padding: 3px 7px;
         border-radius: 999px;
       }
 
@@ -186,11 +205,14 @@
     <div class="container">
       <div class="card">
         <div class="header">
-          <div>
-            <h1 class="title">Scrolly</h1>
-            <p class="subtitle">Smooth auto-scroll, your pace.</p>
+          <div class="header-top">
+            <div class="title-row">
+              <img class="title-icon" src="images/icon128.png" alt="Scrolly icon" />
+              <h1 class="title">Scrolly</h1>
+            </div>
+            <span class="status" id="statusText">Ready</span>
           </div>
-          <span class="status" id="statusText">Ready</span>
+          <p class="subtitle">Smooth auto-scroll, your pace.</p>
         </div>
         <div class="field">
           <label for="scrollPixels">Scroll Pixels</label>
